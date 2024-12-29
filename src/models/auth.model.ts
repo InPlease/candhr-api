@@ -10,6 +10,7 @@ export interface SignUpDataModel {
   accept_terms_conditions: number;
   create_at: Date;
   update_at: Date;
+  language: string;
 }
 
 export interface CheckIfUserExitModel {

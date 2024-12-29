@@ -1,10 +1,12 @@
+// Dependencies
 import { Injectable } from '@nestjs/common';
+import * as crypto from 'crypto';
 
 // Turso Config
 import { turso } from '@configs/turso';
 
 // Utils
-import { createUserQuery } from '@/utils/querys';
+import { createUserQuery, createVerificationCode } from '@/utils/querys';
 
 // Models
 import { SignUpDataModel } from '@/models/auth.model';
@@ -28,5 +30,19 @@ export class AuthService {
         signUpData.update_at,
       ],
     });
+  }
+
+  async createVerifyCode(verificationCode, idType, userUuid) {
+    return await turso.execute({
+      sql: createVerificationCode(idType),
+      args: [userUuid, verificationCode],
+    });
+  }
+
+  generateNumericCode(string) {
+    const hash = crypto.createHash('sha256').update(string).digest('hex');
+    const numericCode = parseInt(hash.slice(0, 4), 16);
+
+    return `${numericCode}`;
   }
 }

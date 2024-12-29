@@ -4,7 +4,7 @@ import { Injectable } from '@nestjs/common';
 import { turso } from '@configs/turso';
 
 // Models
-import { SignUpDataModel, CheckIfUserExitModel } from '@/models/auth.model';
+import { CheckIfUserExitModel } from '@/models/auth.model';
 
 // Utils
 import { getRoleQuery } from '@/utils/querys';
@@ -33,8 +33,9 @@ export class TursoService {
     return false;
   }
 
-  async getRole(id: number) {
-    const roleName = await turso.execute(getRoleQuery(id));
+  async getRole(id: number): Promise<string> {
+    const roleName = (await turso.execute(getRoleQuery(id))).rows[0]
+      .name as string;
     return roleName;
   }
 }
