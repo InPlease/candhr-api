@@ -8,12 +8,18 @@ export interface SignUpDataModel {
   birth_date: Date;
   role_id?: number;
   accept_terms_conditions: number;
-  create_at: Date;
-  update_at: Date;
   language: string;
 }
 
 export interface CheckIfUserExitModel {
   email: string;
   phone_number: string;
+}
+
+export interface CheckIfUserIsVerify {
+  uuid: string;
+  column: string;
+  code: string;
+  create?: boolean;
+  type: number;
 }

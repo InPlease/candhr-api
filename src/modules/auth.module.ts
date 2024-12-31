@@ -12,7 +12,8 @@ import { AuthService } from '@/services/auth/auth.service';
 import { TursoService } from '@/services/turso.service';
 import { EmailSenderService } from '@/services/email-sender/email-sender.service';
 
-/* configuration in relation to .env native by nest was not working
+/* 
+   configuration in relation to .env native by nest was not working
    could be due to a wrong configuration, need to take a look
 */
 dotenv.config();

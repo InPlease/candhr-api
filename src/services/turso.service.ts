@@ -7,17 +7,11 @@ import { turso } from '@configs/turso';
 import { CheckIfUserExitModel } from '@/models/auth.model';
 
 // Utils
-import { getRoleQuery } from '@/utils/querys';
+import { getRoleQuery, userExistsQuery } from '@/utils/querys';
 
 @Injectable()
 export class TursoService {
   async checkIfUserExist({ email, phone_number }: CheckIfUserExitModel) {
-    const userExistsQuery = `
-    SELECT 1 FROM recruiters 
-    WHERE email = ? OR phone_number = ?
-    LIMIT 1;
-    `;
-
     const result: { rows: Array<any> } = await turso.execute({
       sql: userExistsQuery,
       args: [email, phone_number],
